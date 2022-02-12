@@ -13,15 +13,30 @@ SAMPLE OUTPUT: {7,9,1,3,5}
 #include <vector>
 using namespace std;
 
+void reverse(vector<int> &num, int low, int high)
+{
+    while (low < high)
+    {
+        swap(num[high], num[low]);
+        high--;
+        low++;
+    }
+}
+
 vector<int> kRotate(vector<int> a, int k)
 {
-    
+    int n = a.size();
+    k = k % n;
+    reverse(a, 0, n - k - 1);
+    reverse(a, n - k, n - 1);
+    reverse(a, 0, n - 1);
+    return a;
 }
 
 int main()
 {
     vector<int> arr = {1, 3, 5, 7, 9};
-    int x = 2;
+    int x = 4;
 
     for (int i : arr)
     {
@@ -30,6 +45,8 @@ int main()
 
     vector<int> brr = kRotate(arr, x);
 
+    cout << endl;
+
     for (int i : brr)
     {
         cout << i << "\t";
@@ -37,3 +54,17 @@ int main()
 
     return 0;
 }
+
+/*
+Solution 1:
+
+vector<int> b;
+    for (int i = 0, j=a.size()-k; i < a.size(); i++) {
+        if(j==a.size()) {
+            j = 0;
+        }
+        b.push_back(a[j]);
+        j++;
+    }
+    return b;
+*/
