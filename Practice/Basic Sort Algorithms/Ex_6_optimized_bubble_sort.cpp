@@ -5,15 +5,18 @@ using namespace std;
 void bubbleSort(vector<int> &arr)
 {
     int n = arr.size();
-    for (int times = 1; times <= n - 1; times++)
+    for (int times = 1, count = 0; times <= n - 1; times++)
     {
         for (int j = 0; j <= n - times - 1; j++)
         {
             if (arr[j] > arr[j + 1])
             {
                 swap(arr[j], arr[j + 1]);
+                count++;
             }
         }
+        if (count == 0)
+            break;
     }
 }
 
