@@ -1,3 +1,4 @@
 **/**.exe
 **/tasks.json
 **/tempCodeRunnerFile.cpp
+.vscode/settings.json
