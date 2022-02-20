@@ -3,7 +3,55 @@ using namespace std;
 
 pair<int, int> stareCaseSearch(int arr[][4], int n, int m, int key)
 {
-    int startRow = 0;
+    int row = n;
+    int col = m;
+    pair<int, int> res = {-1, -1};
+
+    int s = 0, e = row * col - 1;
+    int mid = s + (e - s) / 2;
+
+    while (s <= e)
+    {
+        int ele = arr[mid / col][mid % col];
+
+        if (ele == key){
+            cout << true << endl;
+        }
+        else if (key > ele)
+            s = mid + 1;
+        else
+            e = mid - 1;
+        mid = s + (e - s) / 2;
+    }
+    return res;
+}
+
+int main()
+{
+    int arr[][4] = {
+        {10, 20, 30, 40},
+        {15, 25, 35, 45},
+        {27, 29, 37, 48},
+        {32, 33, 39, 50}};
+
+    int n = 4, m = 4, key = 25;
+
+    pair<int, int> index = stareCaseSearch(arr, n, m, key);
+
+    if (index.first != -1)
+    {
+        cout << "Element found " << arr[index.first][index.second] << " at index: " << index.first << " , " << index.second << endl;
+    }
+    else
+    {
+        cout << "Not found";
+    }
+
+    return 0;
+}
+
+/*
+int startRow = 0;
     int endRow = n - 1;
     int startColumn = 0;
     int endColumn = m - 1;
@@ -66,28 +114,5 @@ pair<int, int> stareCaseSearch(int arr[][4], int n, int m, int key)
     }
 
     return result;
-}
 
-int main()
-{
-    int arr[][4] = {
-        {10, 20, 30, 40},
-        {15, 25, 35, 45},
-        {27, 29, 37, 48},
-        {32, 33, 39, 50}};
-
-    int n = 4, m = 4, key = 26;
-
-    pair<int, int> index = stareCaseSearch(arr, n, m, key);
-
-    if (index.first != -1)
-    {
-        cout << "Element found " << arr[index.first][index.second] << " at index: " << index.first << " , " << index.second << endl;
-    }
-    else
-    {
-        cout << "Not found";
-    }
-
-    return 0;
-}
+*/

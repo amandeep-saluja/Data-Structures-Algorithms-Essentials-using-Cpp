@@ -10,14 +10,14 @@ void print(char arr[][10], int n) {
 int main() {
 
     char arr[][10] = {
-        "Amandeep",
-        "Anushka",
-        "Amar",
-        "Madhur",
-        "Ankita",
-        "Aniket",
-        "Ishank",
-        "Reena"
+        "John",
+        "Ram",
+        "Kapil",
+        "Singh",
+        "Zenu",
+        "Ankit",
+        "Pushpraj",
+        "Billy"
     };
 
     print(arr, 8);
