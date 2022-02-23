@@ -15,12 +15,24 @@ int countSetBits(int n)
     return count;
 }
 
+int countSetBitsHack(int n)
+{
+    int c = 0;
+
+    while (n > 0)
+    {
+        n = n & (n - 1);
+        c++;
+    }
+    return c;
+}
+
 int main()
 {
 
-    int n = 15;
+    int n = 170; // 10101010
 
-    int c = countSetBits(n);
+    int c = countSetBitsHack(n);
 
     cout << "Set bits: " << c << endl;
 
