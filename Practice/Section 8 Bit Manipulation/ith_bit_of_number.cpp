@@ -45,7 +45,7 @@ int main()
 {
 
     // int n = 15; // 00001111
-    int n = 31;
+    int n = 15;
 
     int i = 1;
     int j = 3;
