@@ -3,7 +3,14 @@ using namespace std;
 
 int xoring(vector<int> v)
 {
-    
+    int n = v[0];
+
+    for (int i = 1; i < v.size(); i++)
+    {
+        n = n ^ v[i];
+    }
+
+    return n;
 }
 
 int main()
