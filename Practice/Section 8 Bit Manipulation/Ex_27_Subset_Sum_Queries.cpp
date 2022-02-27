@@ -1,6 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+vector<bool> subsetSumOptimized(vector<int> num, vector<int> query)
+{
+    int N = query.size();
+    vector<bool> res;
+
+    bitset<10> b;
+    b[0] = 1;
+
+    for (int i = 0; i < num.size(); i++) {
+        b = b | (b<<num[i]);
+    }
+
+    for (int i = 0; i < N; i++) {
+        if(b[query[i]])
+            res.push_back(true);
+        else
+            res.push_back(false);
+    }
+    return res;
+}
+
 vector<bool> subsetSum(vector<int> num, vector<int> query)
 {
     int N = query.size();
@@ -44,9 +65,9 @@ int main()
 {
 
     vector<int> num = {1, 2, 3};
-    vector<int> query = {5, 3, 8};
+    vector<int> query = {5, 3, 8, 6};
 
-    vector<bool> res = subsetSum(num, query);
+    vector<bool> res = subsetSumOptimized(num, query);
 
     for (bool x : res)
     {
