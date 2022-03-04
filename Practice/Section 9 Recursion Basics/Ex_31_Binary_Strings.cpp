@@ -1,6 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#include <bits/stdc++.h>
+using namespace std;
+
+int fac(int n)
+{
+    if (n == 0)
+        return 1;
+    return n * fac(n - 1);
+}
+
 string decimalToBinary(int n)
 {
     int base = 1;
@@ -16,6 +26,26 @@ string decimalToBinary(int n)
     return b;
 }
 
+vector<string> helper(int n)
+{
+    vector<string> s;
+    for (int i = 0; i < fac(n); i++)
+    {
+        s.push_back(decimalToBinary(i));
+    }
+    return s;
+}
+
+vector<string> binaryStrings(int n)
+{
+    // do not modify any default function or parameter you can use helper function if needed
+
+    vector<string> s;
+    s = helper(n);
+    return s;
+}
+
+/*
 int helper(int n)
 {
     if (n == 0)
@@ -30,13 +60,18 @@ int binaryStrings(int n)
 {
     return helper(n);
 }
+*/
 
 int main()
 {
-    int n;
-    cin >> n;
+    // int n;
+    // cin >> n;
 
-    cout << binaryStrings(n) << endl;
+    for (string x : binaryStrings(3))
+    {
+        cout << x << endl;
+    }
+    return 0;
 }
 
 /*
