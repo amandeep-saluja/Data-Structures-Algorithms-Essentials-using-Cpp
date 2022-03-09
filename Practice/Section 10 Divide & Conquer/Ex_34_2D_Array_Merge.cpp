@@ -1,14 +1,48 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+vector<vector<int>> merge(int m, int n, vector<vector<int>> v)
+{
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (v[i][j] < v[j])
+            {
+                swap(v[i], v[j]);
+            }
+        }
+    }
+}
+
 vector<vector<int>> mergeSort(int m, int n, vector<vector<int>> v)
 {
-    return v;
+
+    if (m >= n)
+    {
+        return;
+    }
+
+    if (n & 1)
+    {
+        // odd
+        int mid = (m + n) / 2;
+        mergeSort(m, mid, v);
+        mergeSort(mid + 1, n, v);
+    }
+    else
+    {
+        // even
+        int mid = (m + n) / 2;
+        mergeSort(m, mid, v);
+        mergeSort(mid + 1, n, v);
+    }
+
+    return merge(m, n, v);
 }
 
 int main()
 {
-
     vector<vector<int>> matrix = {
         {18, 4, 16, 8},
         {23, 13, 20, 11},
