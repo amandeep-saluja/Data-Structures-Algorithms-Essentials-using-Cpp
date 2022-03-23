@@ -11,6 +11,7 @@ void printBoard(int n, int board[][20])
         }
         cout << endl;
     }
+    cout << endl;
 }
 
 bool canPlace(int board[][20], int n, int x, int y)
@@ -57,7 +58,7 @@ bool solveNQueens(int n, int board[][20], int i)
     {
         // Print the board
         printBoard(n, board);
-        return true;
+        // return true;
     }
 
     // recursive case
