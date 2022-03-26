@@ -1,8 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool isFound(string str, vector<string> &dictionary, int i, int j)
+{
+    int n = str.length() - 1;
+    if (i < 0 or j < 0 or i > n or j > n)
+    {
+        return false;
+    }
+
+    for (int k = 0; k < dictionary.size(); k++)
+    {
+        if (str.substr(i, j - i + 1) == dictionary[k])
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+int helper(string str, vector<string> &dictionary, int i, int j, string s)
+{
+    int n = str.length();
+    // cout << "n: " << n << " i: " << i << " j: " << j << endl;
+    // base case
+    if (i == n and j == n)
+    {
+        cout << s << endl;
+        return 1;
+    }
+    else if (i > n or j > n)
+    {
+        return 0;
+    }
+
+    // recursive case
+    int ways = 0;
+    if (isFound(str, dictionary, i, j))
+    {
+        ways += helper(str, dictionary, j + 1, j + 1, s + " " + str.substr(i, j - i + 1));
+
+        // backtrack
+        ways += helper(str, dictionary, i, j + 1, s);
+        return ways;
+    }
+
+    ways += helper(str, dictionary, i, j + 1, s);
+    return ways;
+}
+
 int wordBreak(string str, vector<string> &dictionary)
 {
+    string s = "";
+    return helper(str, dictionary, 0, 0, s);
 }
 
 int main()
