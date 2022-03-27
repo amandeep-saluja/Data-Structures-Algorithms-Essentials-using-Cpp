@@ -44,6 +44,18 @@ public:
         //      << endl;
     }
 
+    // we have to define our own/override copy assignment operator
+    void operator=(Product &X)
+    {
+        cout << "Inside copy assignment operator" << endl;
+        this->id = X.getId();
+        this->selling_price = X.getSellingPrice();
+        this->mrp = X.getMRP();
+        this->name = new char[strlen(X.getName()) + 1];
+        // Due to shallow copy/ deep copy
+        strcpy(this->name, X.getName());
+    }
+
     int getMRP()
     {
         return mrp;
@@ -98,7 +110,9 @@ int main()
 
     Product camera(101, "GoProHero8", 28000, 26000);
 
-    Product old_cam(camera); // copy constructor is called
+    Product old_cam; // copy constructor is called
+
+    old_cam = camera; // copy assignment operator will be called
 
     old_cam.setName("Hero2");
 
