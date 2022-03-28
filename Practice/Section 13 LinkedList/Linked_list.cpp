@@ -26,5 +26,13 @@ int main()
 
     l.print();
 
+    cout << "Pop front: " << l.pop_front() << endl;
+    cout << "Pop front: " << l.pop_front() << endl;
+    cout << "Pop front: " << l.pop_front() << endl;
+    cout << "Pop front: " << l.pop_front() << endl;
+    // cout << "Pop front: " << l.pop_front() << endl;
+
+    l.print();
+
     return 0;
 }

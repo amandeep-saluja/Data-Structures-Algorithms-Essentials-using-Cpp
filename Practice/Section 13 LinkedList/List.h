@@ -1,4 +1,4 @@
-// List header file
+// #include <iostream>
 using namespace std;
 
 class Node
@@ -9,6 +9,15 @@ class Node
 public:
     // Initializer list
     Node(int d) : data(d), next(nullptr) {}
+
+    ~Node()
+    {
+        if (next != nullptr)
+        {
+            delete next;
+        }
+        cout << "Deleting the node with data " << data << endl;
+    }
 
     void setNext(Node *node)
     {
@@ -56,6 +65,15 @@ class List
 
 public:
     List() : head(nullptr), tail(nullptr) {}
+
+    ~List()
+    {
+        if (head != nullptr)
+        {
+            delete head;
+        }
+        cout << "Deleting the linked list" << endl;
+    }
 
     Node *begin()
     {
@@ -138,6 +156,21 @@ public:
         return searchHelper(data, head);
     }
 
+    int pop_front()
+    {
+        if (head == nullptr)
+        {
+            return -1;
+        }
+
+        Node *temp = head;
+        head = head->getNext();
+        temp->setNext(nullptr);
+        int data = temp->getData();
+        delete temp;
+        return data;
+    }
+
     void print()
     {
         Node *node = head;
@@ -146,5 +179,6 @@ public:
             cout << node->getData() << " -> ";
             node = node->getNext();
         }
+        cout << endl;
     }
 };
