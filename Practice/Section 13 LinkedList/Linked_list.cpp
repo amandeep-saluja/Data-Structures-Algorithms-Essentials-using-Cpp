@@ -10,6 +10,9 @@ int main()
     l.push_front(3);
     l.push_front(4);
     l.push_back(2);
+    l.push_back(6);
+
+    l.insert(5, 12);
 
     l.print();
 

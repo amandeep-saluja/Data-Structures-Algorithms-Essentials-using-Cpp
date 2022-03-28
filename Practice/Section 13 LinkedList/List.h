@@ -77,6 +77,28 @@ public:
         }
     }
 
+    void insert(int data, int pos)
+    {
+        if (pos == 0)
+        {
+            this->push_front(data);
+        }
+
+        Node *n = head;
+        int jump = 0;
+        while (n != nullptr)
+        {
+            jump++;
+            if (jump == pos)
+            {
+                Node *newNode = new Node(data);
+                newNode->setNext(n->getNext());
+                n->setNext(newNode);
+            }
+            n = n->getNext();
+        }
+    }
+
     void print()
     {
         Node *node = head;
