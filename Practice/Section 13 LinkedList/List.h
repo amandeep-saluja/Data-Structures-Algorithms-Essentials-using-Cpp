@@ -36,6 +36,24 @@ class List
     Node *head;
     Node *tail;
 
+    int searchHelper(int data, Node *n)
+    {
+        if (n == nullptr)
+        {
+            return -1;
+        }
+        if (n->getData() == data)
+        {
+            return 0;
+        }
+
+        int subIdx = searchHelper(data, n->getNext());
+        if (subIdx == -1)
+            return -1;
+        else
+            return subIdx + 1;
+    }
+
 public:
     List() : head(nullptr), tail(nullptr) {}
 
@@ -97,6 +115,27 @@ public:
             }
             n = n->getNext();
         }
+    }
+
+    int search(int data)
+    {
+        Node *n = head;
+        int index = 0;
+        while (n != nullptr)
+        {
+            if (n->getData() == data)
+            {
+                return index;
+            }
+            index++;
+            n = n->getNext();
+        }
+        return -1;
+    }
+
+    int recursiveSearch(int data)
+    {
+        return searchHelper(data, head);
     }
 
     void print()

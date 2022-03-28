@@ -14,6 +14,16 @@ int main()
 
     l.insert(5, 12);
 
+    // cout << l.search(4) << endl;
+    // cout << l.search(1) << endl;
+    // cout << l.search(6) << endl;
+    // cout << l.search(99) << endl;
+
+    cout << l.recursiveSearch(4) << endl;
+    cout << l.recursiveSearch(1) << endl;
+    cout << l.recursiveSearch(6) << endl;
+    cout << l.recursiveSearch(99) << endl;
+
     l.print();
 
     return 0;
