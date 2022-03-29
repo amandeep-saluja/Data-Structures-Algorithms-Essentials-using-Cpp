@@ -171,13 +171,93 @@ public:
         return data;
     }
 
+    int remove(int pos)
+    {
+        if (head == nullptr)
+        {
+            return -1;
+        }
+
+        if (pos == 1)
+        {
+            int d = head->getData();
+            // Node *n = head;
+            if (head->getNext() == nullptr)
+            {
+                delete head;
+                head = nullptr;
+            }
+            else
+            {
+                Node *n = head;
+                head = head->getNext();
+                n->setNext(nullptr);
+                delete n;
+            }
+
+            return d;
+        }
+
+        Node *n = head;
+        Node *prev = nullptr;
+        for (int jump = 1; n != nullptr; jump++)
+        {
+            if (jump == pos)
+            {
+                break;
+            }
+            prev = n;
+            n = n->getNext();
+        }
+        if (n != nullptr)
+        {
+            int d = n->getData();
+            prev->setNext(n->getNext());
+            n->setNext(nullptr);
+            delete n;
+            return d;
+        }
+        return -1;
+    }
+
+    int pop_back()
+    {
+        if (head == nullptr)
+        {
+            return -1;
+        }
+        if (head->getNext() == nullptr)
+        {
+            int d = head->getData();
+            delete head;
+            head = nullptr;
+            return d;
+        }
+        Node *secondLast = nullptr;
+        Node *n = head;
+        while (n->getNext() != nullptr)
+        {
+            secondLast = n;
+            n = n->getNext();
+        }
+
+        int d = n->getData();
+        secondLast->setNext(nullptr);
+        delete n;
+        return d;
+    }
+
     void print()
     {
         Node *node = head;
+        int count = 0;
         while (node != nullptr)
         {
             cout << node->getData() << " -> ";
             node = node->getNext();
+            count++;
+            if (count == 10)
+                break;
         }
         cout << endl;
     }
