@@ -247,6 +247,26 @@ public:
         return d;
     }
 
+    void reverse()
+    {
+        if (head->getNext() != nullptr)
+        {
+            Node *prev = nullptr;
+            Node *current = head;
+            Node *temp;
+            tail = head;
+
+            while (current != nullptr)
+            {
+                temp = current->getNext();
+                current->setNext(prev);
+                prev = current;
+                current = temp;
+            }
+            head = prev;
+        }
+    }
+
     void print()
     {
         Node *node = head;

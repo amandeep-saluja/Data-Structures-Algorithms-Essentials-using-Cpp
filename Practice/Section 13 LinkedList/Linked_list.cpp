@@ -39,7 +39,8 @@ int main()
     // cout << "Pop back 5: " << l.pop_back() << endl;
     // cout << "Pop back 6: " << l.pop_back() << endl;
 
-    cout << l.remove(5) << endl;
+    // cout << l.remove(5) << endl;
+    l.reverse();
 
     l.print();
 
