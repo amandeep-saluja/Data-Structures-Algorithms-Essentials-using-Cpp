@@ -267,6 +267,36 @@ public:
         }
     }
 
+    int kthLastElement(Node *head, int k)
+    {
+        if (head == nullptr)
+        {
+            return -1;
+        }
+
+        Node *n = head;
+    }
+
+    int midOfLinklist()
+    {
+        if (head == nullptr)
+        {
+            return -1;
+        }
+
+        Node *fast = head;
+        Node *slow = head;
+
+        while (fast->getNext() != nullptr and fast->getNext()->getNext() != nullptr)
+        {
+            // cout << "fast: " << fast->getData() << " slow: " << slow->getData() << endl;
+            fast = fast->getNext()->getNext();
+            slow = slow->getNext();
+        }
+
+        return slow->getData();
+    }
+
     void print()
     {
         Node *node = head;
