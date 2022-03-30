@@ -12,7 +12,7 @@ int main()
     l.push_back(2);
     l.push_back(6);
 
-    l.insert(5, 12);
+    l.insert(5, 2);
 
     // cout << l.search(4) << endl;
     // cout << l.search(1) << endl;
@@ -40,7 +40,8 @@ int main()
     // cout << "Pop back 6: " << l.pop_back() << endl;
 
     // cout << l.remove(5) << endl;
-    l.reverse();
+    // l.reverse();
+    cout << "Mid: " << l.midOfLinklist() << endl;
 
     l.print();
 
