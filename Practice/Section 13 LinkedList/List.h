@@ -16,7 +16,7 @@ public:
         {
             delete next;
         }
-        cout << "Deleting the node with data " << data << endl;
+        // cout << "Deleting the node with data " << data << endl;
     }
 
     void setNext(Node *node)
