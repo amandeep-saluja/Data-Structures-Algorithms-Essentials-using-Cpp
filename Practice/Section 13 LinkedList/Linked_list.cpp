@@ -41,9 +41,10 @@ int main()
 
     // cout << l.remove(5) << endl;
     // l.reverse();
-    cout << "Mid: " << l.midOfLinklist() << endl;
+    // cout << "Mid: " << l.midOfLinklist() << endl;
+    cout << "Kth element: " << l.kthLastElement(4) << endl;
 
-    l.print();
+    // l.print();
 
     return 0;
 }

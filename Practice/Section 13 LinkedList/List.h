@@ -72,7 +72,7 @@ public:
         {
             delete head;
         }
-        cout << "Deleting the linked list" << endl;
+        // cout << "Deleting the linked list" << endl;
     }
 
     Node *begin()
@@ -267,14 +267,27 @@ public:
         }
     }
 
-    int kthLastElement(Node *head, int k)
+    int kthLastElement(int k)
     {
         if (head == nullptr)
         {
             return -1;
         }
 
-        Node *n = head;
+        Node *fast = head;
+        Node *slow = head;
+
+        for (int i = 1; i < k; i++)
+        {
+            fast = fast->getNext();
+        }
+
+        while (fast->getNext() != nullptr)
+        {
+            fast = fast->getNext();
+            slow = slow->getNext();
+        }
+        return slow->getData();
     }
 
     int midOfLinklist()
