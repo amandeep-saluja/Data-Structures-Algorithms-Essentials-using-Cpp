@@ -36,6 +36,29 @@ Node *alternateMerge(Node *root1, Node *root2)
     return dummyNode->getNext();
 }
 
+Node *alternateMergeRecursive(Node *node1, Node *node2)
+{
+
+    if (node1 == NULL)
+    {
+        return node2;
+    }
+    if (node2 == NULL)
+    {
+        return node1;
+    }
+
+    Node *head = node1;
+    Node *p3 = head;
+    Node *nextNode = node1->getNext();
+
+    p3->setNext(node2);
+    p3 = p3->getNext();
+    p3->setNext(alternateMergeRecursive(nextNode, node2->getNext()));
+
+    return head;
+}
+
 void print(Node *head)
 {
     Node *node = head;
@@ -48,7 +71,7 @@ void print(Node *head)
         if (count == 15)
         {
             cout << "Had to break";
-            break;
+            return;
         }
     }
     cout << endl;
@@ -61,7 +84,7 @@ int main()
     l.push_back(1);
     l.push_back(3);
     l.push_back(5);
-    l.push_back(7);
+    // l.push_back(7);
     l.push_back(9);
 
     // cout << l.search(4) << endl;
@@ -101,10 +124,10 @@ int main()
     l2.push_back(4);
     l2.push_back(6);
     l2.push_back(8);
-    // l2.push_back(10);
+    l2.push_back(10);
     l2.print();
 
-    Node *head = alternateMerge(l.begin(), l2.begin());
+    Node *head = alternateMergeRecursive(l.begin(), l2.begin());
 
     cout << "Merging both list" << endl;
 
