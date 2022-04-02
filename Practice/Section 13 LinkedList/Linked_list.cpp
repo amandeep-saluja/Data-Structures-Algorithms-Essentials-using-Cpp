@@ -4,43 +4,36 @@ using namespace std;
 
 Node *alternateMerge(Node *root1, Node *root2)
 {
-    if (root1 == NULL or root2 == NULL)
+    Node *p1 = root1;
+    Node *p2 = root2;
+
+    Node *dummyNode = new Node(-1);
+    Node *p3 = dummyNode;
+
+    while (p1 != NULL and p2 != NULL)
     {
-        return NULL;
+        p3->setNext(p1);
+        p1 = p1->getNext();
+        p3 = p3->getNext();
+
+        p3->setNext(p2);
+        p2 = p2->getNext();
+        p3 = p3->getNext();
     }
 
-    Node *first = root1;
-    Node *second = root2;
-    Node *temp = NULL;
-
-    while (first->getNext() != NULL and second->getNext() != NULL)
+    while (p1 != NULL)
     {
-        temp = first->getNext();
-        first->setNext(second);
-        first = temp;
-        temp = second->getNext();
-        second->setNext(first);
-        second = temp;
-        // first = first->getNext();
-        // second = second->getNext();
+        p3->setNext(p1);
+        p1 = p1->getNext();
     }
 
-    if (first->getNext() == NULL)
+    while (p2 != NULL)
     {
-        first->setNext(second);
+        p3->setNext(p2);
+        p2 = p2->getNext();
     }
-    else if (second->getNext() == NULL)
-    {
-        // cout << "Hi";
-        second->setNext(first);
-    }
-    // else if (first->getNext() == NULL)
-    // {
-    //     cout << "Here";
-    //     first->setNext(second);
-    // }
 
-    return root1;
+    return dummyNode->getNext();
 }
 
 void print(Node *head)
@@ -119,3 +112,40 @@ int main()
 
     return 0;
 }
+
+/*
+
+Node *alternateMerge(Node *root1, Node *root2)
+{
+    if (root1 == NULL or root2 == NULL)
+    {
+        return NULL;
+    }
+
+    Node *first = root1;
+    Node *second = root2;
+    Node *temp = NULL;
+
+    while (first->getNext() != NULL and second->getNext() != NULL)
+    {
+        temp = first->getNext();
+        first->setNext(second);
+        first = temp;
+        temp = second->getNext();
+        second->setNext(first);
+        second = temp;
+    }
+
+    if (first->getNext() == NULL)
+    {
+        first->setNext(second);
+    }
+    else if (second->getNext() == NULL)
+    {
+        second->setNext(first);
+    }
+
+    return root1;
+}
+
+*/
