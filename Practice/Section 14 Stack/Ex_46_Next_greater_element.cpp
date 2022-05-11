@@ -6,37 +6,31 @@ using namespace std;
 
 vector<int> nextGreaterElement(vector<int> v)
 {
-    vector<int> n;
     stack<int> s;
+    vector<int> n(v.size(), 0);
 
-    for (int i = 0, j = 0; i < v.size(); i++)
+    for (int i = 0; i < v.size(); i++)
     {
-        int curr = v[i];
-        while (curr > v[++j] and j < v.size())
+        while (!s.empty() and v[s.top()] < v[i])
         {
+            n[s.top()] = v[i];
+            s.pop();
         }
-        if (j < v.size())
-        {
-            s.push(v[j]);
-        }
-        else
-        {
-            s.push(-1);
-        }
-        j = i + 1;
+        s.push(i);
     }
+
     while (!s.empty())
     {
-        n.push_back(s.top());
+        n[s.top()] = -1;
         s.pop();
     }
-    reverse(n.begin(), n.end());
+
     return n;
 }
 
 int main()
 {
-    vector<int> n = {4, 5, 12, 25, 3, 1, 2, 9, 0};
+    vector<int> n = {4, 5, 2, 25, 7, 8};
 
     for (int x : nextGreaterElement(n))
     {
@@ -66,4 +60,35 @@ v = { 4, 5, 2, 25 }
 Sample Output
 { 5, 25, 25, -1 }
 
+*/
+
+/*
+Old
+
+vector<int> n;
+    stack<int> s;
+
+    for (int i = 0, j = 0; i < v.size(); i++)
+    {
+        int curr = v[i];
+        while (curr > v[++j] and j < v.size())
+        {
+        }
+        if (j < v.size())
+        {
+            s.push(v[j]);
+        }
+        else
+        {
+            s.push(-1);
+        }
+        j = i + 1;
+    }
+    while (!s.empty())
+    {
+        n.push_back(s.top());
+        s.pop();
+    }
+    reverse(n.begin(), n.end());
+    return n;
 */
