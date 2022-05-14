@@ -54,7 +54,7 @@ int getMaxArea(vector<int> hist)
         }
         else
         {
-            ns[i] = -1;
+            ns[i] = n;
         }
         s.push(i);
     }
