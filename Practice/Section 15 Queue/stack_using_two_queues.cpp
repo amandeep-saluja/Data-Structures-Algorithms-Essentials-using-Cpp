@@ -15,27 +15,45 @@ public:
 
     int top()
     {
-        // cout << "Top" << endl;
-        if (!q1.empty() and q2.empty())
+        if (!q1.empty())
         {
-            return q1.back();
+            while (!q1.empty())
+            {
+                int front = q1.front();
+                q2.push(front);
+                q1.pop();
+
+                if (q1.empty())
+                {
+                    return front;
+                }
+            }
         }
-        else if (q1.empty() and !q2.empty())
+        else
         {
-            return q2.back();
+            while (!q2.empty())
+            {
+                int front = q2.front();
+                q1.push(front);
+                q2.pop();
+
+                if (q2.empty())
+                {
+                    return front;
+                }
+            }
         }
-        return -1;
     }
 
     void push(int data)
     {
         cout << "Push: " << data;
-        if ((!q1.empty() and q2.empty()) or (q1.empty() and q2.empty()))
+        if (!q1.empty())
         {
             cout << " in q1" << endl;
             q1.push(data);
         }
-        else if (q1.empty() and !q2.empty())
+        else
         {
             cout << " in q2" << endl;
             q2.push(data);
@@ -43,23 +61,32 @@ public:
     }
     void pop()
     {
-        // cout << "Pop" << endl;
-        if (!q1.empty() and q2.empty())
+        if (!q1.empty())
         {
             while (!q1.empty())
             {
-                if (q1.front() != q1.back())
-                    q2.push(q1.front());
+                int front = q1.front();
                 q1.pop();
+
+                if (q1.empty())
+                {
+                    break;
+                }
+                q2.push(front);
             }
         }
-        else if (q1.empty() and !q2.empty())
+        else
         {
             while (!q2.empty())
             {
-                if (q2.front() != q2.back())
-                    q1.push(q2.front());
+                int front = q2.front();
                 q2.pop();
+
+                if (q2.empty())
+                {
+                    break;
+                }
+                q1.push(front);
             }
         }
     }
