@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class Node
@@ -31,22 +32,38 @@ Node *buildTree()
     return n;
 }
 
-// Inorder Traversal -> Left, Root, Right
-void printInorder(Node *root)
+void levelOrder(Node *root, queue<Node*> q)
 {
     if (root == NULL)
     {
         return;
     }
-    printInorder(root->left);
-    cout << root->data << " ";
-    printInorder(root->right);
+
+    q.push(root);
+    q.push(NULL);
+
+    while (!q.empty() and q.front() != NULL)
+    {
+        while (q.front() != NULL)
+        {
+            cout << q.front()->data << " ";
+            if(q.front()->left!=NULL)
+                q.push(q.front()->left);
+            if (q.front()->right != NULL)
+                q.push(q.front()->right);
+            q.pop();
+        }
+        q.pop();
+        cout << endl;
+        q.push(NULL);
+    }
 }
 
 int main()
 {
     Node *root = buildTree();
-    printInorder(root);
+    queue<Node*> q;
+    levelOrder(root, q);
 
     return 0;
 }
