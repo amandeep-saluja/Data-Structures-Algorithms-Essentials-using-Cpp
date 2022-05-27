@@ -16,29 +16,36 @@ public:
 
 int evalTree(Node *root)
 {
-    cout << root->key << endl;
-    if (root == NULL)
+    if (root->left == NULL and root->right == NULL)
     {
-        cout << "here ";
-        return 0;
+        return stoi(root->key);
     }
 
     int a = evalTree(root->left);
-    cout << root->key << " ";
     int b = evalTree(root->right);
-    return a + b;
+    if (root->key == "+")
+        return a + b;
+    else if (root->key == "-")
+        return a - b;
+    else if (root->key == "*")
+        return a * b;
+    else
+        return a / b;
 }
 
 void printInorder(Node *root)
 {
-    cout << root->key << " ";
+    // cout << root << "... " << endl;
     if (root == NULL)
     {
+        // cout << root << "ending" << endl;
         return;
     }
-
+    // cout << "calling left: " << endl;
     printInorder(root->left);
-    cout << root->key << " ";
+    // if (root == NULL)
+    cout << root->key << "; ";
+    // cout << "calling right: " << endl;
     printInorder(root->right);
 }
 
@@ -59,17 +66,38 @@ Node *buildTree()
 
 int main()
 {
-    // Node* root = new Node("+");
-    // root->left = new Node("3");
-    // root->right = new Node("*");
-    // root->right->left = new Node("+");
-    // root->right->left->left = new Node("5");
-    // root->right->left->right = new Node("9");
-    // root->right->right = new Node("2");
-    Node *root = buildTree();
+    Node *root = new Node("+");
+    root->left = new Node("3");
+    root->right = new Node("*");
+    root->right->left = new Node("+");
+    root->right->left->left = new Node("5");
+    root->right->left->right = new Node("9");
+    root->right->right = new Node("2");
+    cout << evalTree(root) << endl;
 
-    // cout<<evalTree(root);
-    printInorder(root);
-    // cout<<"\n Hello"<<endl;
+    delete (root);
+
+    root = new Node("+");
+    root->left = new Node("*");
+    root->left->left = new Node("5");
+    root->left->right = new Node("-4");
+    root->right = new Node("-");
+    root->right->left = new Node("100");
+    root->right->right = new Node("20");
+    cout << evalTree(root) << endl;
+
+    delete (root);
+
+    root = new Node("+");
+    root->left = new Node("*");
+    root->left->left = new Node("5");
+    root->left->right = new Node("4");
+    root->right = new Node("-");
+    root->right->left = new Node("100");
+    root->right->right = new Node("/");
+    root->right->right->left = new Node("20");
+    root->right->right->right = new Node("2");
+
+    cout << evalTree(root);
     return 0;
 }
