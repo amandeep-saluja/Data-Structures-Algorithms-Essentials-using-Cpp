@@ -25,11 +25,44 @@ void printInorder(node *root, vector<int> &v)
     v.push_back(root->key);
     printInorder(root->right, v);
 }
+node *removeNode(node *root)
+{
+    if (root == NULL)
+    {
+        return NULL;
+    }
+
+    if (root->left == NULL or root->right == NULL)
+    {
+        node *temp = NULL;
+        if (root->left != NULL)
+            temp = root->left;
+        if (root->right != NULL)
+            temp = root->right;
+        // delete (root);
+        return temp;
+    }
+    cout << root->key << root->left->key << root->right->key << endl;
+    node *l = removeNode(root->left);
+    node *r = removeNode(root->right);
+    if (l != NULL)
+    {
+        cout << "Shifting: " << root->left->key << " to " << l->key << endl;
+        root->left = l;
+    }
+    if (r != NULL)
+    {
+        cout << "Shifting: " << root->right->key << " to " << r->key << endl;
+        root->right = r;
+    }
+    return root;
+}
 
 vector<int> removeHalfNodes(node *root)
 {
     vector<int> v;
     printInorder(root, v);
+    root = removeNode(root);
     return v;
 }
 
