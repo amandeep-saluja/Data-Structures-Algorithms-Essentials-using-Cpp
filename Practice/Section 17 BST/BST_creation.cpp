@@ -16,30 +16,18 @@ public:
 
 node *insert(node *root, int data)
 {
-    node *newNode = new node(data);
-    node *temp = root;
     if (root == NULL)
     {
-        return newNode;
+        return new node(data);
     }
-    while (temp->left != NULL and temp->right != NULL)
+
+    if (data < root->key)
     {
-        if (data < temp->key)
-        {
-            temp = temp->left;
-        }
-        else if (data > temp->key)
-        {
-            temp = temp->right;
-        }
-    }
-    if (data < temp->key)
-    {
-        temp->left = newNode;
+        root->left = insert(root->left, data);
     }
     else
     {
-        temp->right = newNode;
+        root->right = insert(root->right, data);
     }
 
     return root;
@@ -107,3 +95,39 @@ int main()
 
     return 0;
 }
+
+/*
+
+
+node *insert(node *root, int data)
+{
+    node *newNode = new node(data);
+    node *temp = root;
+    if (root == NULL)
+    {
+        return newNode;
+    }
+    while (temp->left != NULL and temp->right != NULL)
+    {
+        if (data < temp->key)
+        {
+            temp = temp->left;
+        }
+        else if (data > temp->key)
+        {
+            temp = temp->right;
+        }
+    }
+    if (data < temp->key)
+    {
+        temp->left = newNode;
+    }
+    else
+    {
+        temp->right = newNode;
+    }
+
+    return root;
+}
+
+*/
