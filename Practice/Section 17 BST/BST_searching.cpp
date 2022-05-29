@@ -43,11 +43,15 @@ void printInorder(node *root)
     }
 }
 
-node *search(node *root, int data)
+bool search(node *root, int data)
 {
-    if (root != NULL and root->key == data)
+    if (root == NULL)
     {
-        return root;
+        return false;
+    }
+    if (root->key == data)
+    {
+        return true;
     }
 
     if (data < root->key)
@@ -74,9 +78,8 @@ int main()
     printInorder(root);
     cout << endl;
 
-    node *s = search(root, 14);
-    if (s != NULL)
-        cout << s->key << " Found" << endl;
+    if (search(root, 1))
+        cout << "Found" << endl;
     else
         cout << "Not found" << endl;
 
