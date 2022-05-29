@@ -33,16 +33,7 @@ node *insert(node *root, int data)
     return root;
 }
 
-void printInorder(node *root)
-{
-    if (root != NULL)
-    {
-        printInorder(root->left);
-        cout << root->key << " ";
-        printInorder(root->right);
-    }
-}
-
+// Complexity : log N <= O[Height] <= M
 bool search(node *root, int data)
 {
     if (root == NULL)
@@ -58,10 +49,7 @@ bool search(node *root, int data)
     {
         return search(root->left, data);
     }
-    else
-    {
-        return search(root->right, data);
-    }
+    return search(root->right, data);
 }
 
 int main()
@@ -74,9 +62,6 @@ int main()
     {
         root = insert(root, x);
     }
-
-    printInorder(root);
-    cout << endl;
 
     if (search(root, 1))
         cout << "Found" << endl;
