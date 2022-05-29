@@ -1,86 +1,86 @@
+// C++ program to remove all half nodes
 #include <bits/stdc++.h>
 using namespace std;
 
-class node
+struct node
 {
-public:
-    int key;
-    node *left, *right;
-    node(int d)
-    {
-        key = d;
-        left = NULL;
-        right = NULL;
-    }
+    int data;
+    struct node *left, *right;
 };
 
-void printInorder(node *root, vector<int> &v)
+struct node *newNode(int data)
 {
-    if (root == NULL)
-    {
-        return;
-    }
-
-    printInorder(root->left, v);
-    v.push_back(root->key);
-    printInorder(root->right, v);
+    node *nod = new node();
+    nod->data = data;
+    nod->left = nod->right = NULL;
+    return (nod);
 }
-node *removeNode(node *root)
+
+void printInoder(struct node *root)
+{
+    if (root != NULL)
+    {
+        printInoder(root->left);
+        cout << root->data << " ";
+        printInoder(root->right);
+    }
+}
+
+// Removes all nodes with only one child and returns
+// new root (note that root may change)
+struct node *RemoveHalfNodes(struct node *root)
 {
     if (root == NULL)
-    {
         return NULL;
+
+    root->left = RemoveHalfNodes(root->left);
+    root->right = RemoveHalfNodes(root->right);
+
+    if (root->left == NULL && root->right == NULL)
+        return root;
+
+    /* if current nodes is a half node with left
+    child NULL left, then it's right child is
+    returned and replaces it in the given tree */
+    if (root->left == NULL)
+    {
+        struct node *new_root = root->right;
+        free(root); // To avoid memory leak
+        return new_root;
     }
 
-    if (root->left == NULL or root->right == NULL)
+    /* if current nodes is a half node with right
+    child NULL right, then it's right child is
+    returned and replaces it in the given tree */
+    if (root->right == NULL)
     {
-        node *temp = NULL;
-        if (root->left != NULL)
-            temp = root->left;
-        if (root->right != NULL)
-            temp = root->right;
-        // delete (root);
-        return temp;
+        struct node *new_root = root->left;
+        free(root); // To avoid memory leak
+        return new_root;
     }
-    cout << root->key << root->left->key << root->right->key << endl;
-    node *l = removeNode(root->left);
-    node *r = removeNode(root->right);
-    if (l != NULL)
-    {
-        cout << "Shifting: " << root->left->key << " to " << l->key << endl;
-        root->left = l;
-    }
-    if (r != NULL)
-    {
-        cout << "Shifting: " << root->right->key << " to " << r->key << endl;
-        root->right = r;
-    }
+
     return root;
 }
 
-vector<int> removeHalfNodes(node *root)
+// Driver program
+int main(void)
 {
-    vector<int> v;
-    printInorder(root, v);
-    root = removeNode(root);
-    return v;
-}
+    struct node *NewRoot = NULL;
+    struct node *root = newNode(2);
+    root->left = newNode(7);
+    root->right = newNode(5);
+    root->left->right = newNode(6);
+    root->left->right->left = newNode(1);
+    root->left->right->right = newNode(11);
+    root->right->right = newNode(9);
+    root->right->right->left = newNode(4);
 
-int main()
-{
-    node *root = new node(2);
-    root->left = new node(7);
-    root->left->right = new node(6);
-    root->left->right->left = new node(1);
-    root->left->right->right = new node(11);
-    root->right = new node(5);
-    root->right->right = new node(9);
-    root->right->right->left = new node(4);
+    cout << "Inorder traversal of given tree \n";
+    printInoder(root);
 
-    for (int x : removeHalfNodes(root))
-    {
-        cout << x << " ";
-    }
+    NewRoot = RemoveHalfNodes(root);
 
+    cout << "\nInorder traversal of the modified tree \n";
+    printInoder(NewRoot);
     return 0;
 }
