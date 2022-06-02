@@ -15,22 +15,44 @@ public:
     }
 };
 
-bool isBST(Node *root)
+bool checkBST(Node *root, int min, int max)
 {
     if (root == NULL)
     {
         return true;
     }
-    bool bst = true;
-    if (root->left != NULL)
+
+    if (root->key < min or root->key > max)
     {
-        bst = bst and root->left->key < root->key;
+        return false;
     }
-    if (root->right != NULL)
+
+    return checkBST(root->left, min, root->key - 1) and checkBST(root->right, root->key + 1, max);
+}
+
+Node *pre = NULL;
+
+bool isBST(Node *root)
+{
+    // return checkBST(root, INT_MIN, INT_MAX);
+
+    if (root != NULL)
     {
-        bst = bst and root->right->key > root->key;
+        if (!isBST(root->left))
+        {
+            return false;
+        }
+
+        if (pre != NULL and root->key <= pre->key)
+        {
+            return false;
+        }
+
+        pre = root;
+
+        return isBST(root->right);
     }
-    return bst and isBST(root->left) and isBST(root->right);
+    return true;
 }
 
 void printInorder(Node *root)
@@ -67,5 +89,43 @@ int main()
     cout << endl;
     cout << "Is BST: " << isBST(root) << endl;
 
+    root = new Node(4);
+    root->left = new Node(2);
+    root->right = new Node(5);
+    root->left->left = new Node(1);
+    root->left->right = new Node(3);
+
+    printInorder(root);
+    cout << endl;
+    cout << "Is BST: " << isBST(root) << endl;
+
     return 0;
 }
+
+/*
+
+WRONG
+
+bool isBST(Node *root)
+{
+    if (root == NULL)
+    {
+        return true;
+    }
+    bool bst = true;
+    if (root->left != NULL)
+    {
+        bst = bst and root->left->key < root->key;
+    }
+    if (root->right != NULL)
+    {
+        bst = bst and root->right->key > root->key;
+    }
+    if (!bst)
+    {
+        return false;
+    }
+    return bst and isBST(root->left) and isBST(root->right);
+}
+
+*/
