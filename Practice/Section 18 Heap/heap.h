@@ -54,47 +54,12 @@ class Heap
         }
     */
 
-    void heapify(int i)
-    {
-        int left = 2 * i;
-        int right = 2 * i + 1;
-
-        int minIdx = i;
-        if (left < v.size() and v[left] < v[i])
-        {
-            minIdx = left;
-        }
-        if (right < v.size() and v[right] < v[minIdx])
-        {
-            minIdx = right;
-        }
-
-        if (minIdx != i)
-        {
-            swap(v[minIdx], v[i]);
-            heapify(minIdx);
-        }
-    }
-
-    /*
-        void heapify(int i)
-        {
-            if (i > v.size())
-                return;
-            int left = 2 * i;
-            int right = 2 * i + 1;
-
-            int minIdx = min(v[left], v[right]);
-            swap(v[minIdx], v[i]);
-            heapify(minIdx);
-        }
-    */
-
 public:
     Heap(int default_size = 10, bool minHeap = true)
     {
         v.reserve(default_size + 1);
         v.push_back(-1);
+        this->minHeap = minHeap;
     }
 
     void push(int data)
@@ -114,7 +79,7 @@ public:
     }
 
     // return min element
-    void top()
+    int top()
     {
         return v[1];
     }
@@ -140,5 +105,14 @@ public:
     bool empty()
     {
         return v.size() == 1;
+    }
+
+    void print()
+    {
+        for (int x : v)
+        {
+            cout << x << " ";
+        }
+        cout << endl;
     }
 };
