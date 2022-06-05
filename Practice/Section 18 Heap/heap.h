@@ -54,6 +54,42 @@ class Heap
         }
     */
 
+    void heapify(int i)
+    {
+        int left = 2 * i;
+        int right = 2 * i + 1;
+
+        int minIdx = i;
+        if (left < v.size() and v[left] < v[i])
+        {
+            minIdx = left;
+        }
+        if (right < v.size() and v[right] < v[minIdx])
+        {
+            minIdx = right;
+        }
+
+        if (minIdx != i)
+        {
+            swap(v[minIdx], v[i]);
+            heapify(minIdx);
+        }
+    }
+
+    /*
+        void heapify(int i)
+        {
+            if (i > v.size())
+                return;
+            int left = 2 * i;
+            int right = 2 * i + 1;
+
+            int minIdx = min(v[left], v[right]);
+            swap(v[minIdx], v[i]);
+            heapify(minIdx);
+        }
+    */
+
 public:
     Heap(int default_size = 10, bool minHeap = true)
     {
