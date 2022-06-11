@@ -30,6 +30,11 @@ public:
     }
 };
 
+bool compare(const Car c1, const Car c2)
+{
+    return c1.dist() < c2.dist();
+}
+
 void printNearestCars(vector<Car> cars, int k)
 {
     priority_queue<Car, vector<Car>, Comparator> max_heap(cars.begin(), cars.begin() + k);
@@ -46,10 +51,16 @@ void printNearestCars(vector<Car> cars, int k)
         i++;
     }
 
+    vector<Car> output;
     while (!max_heap.empty())
     {
-        cout << max_heap.top().id << endl;
+        output.push_back(max_heap.top());
         max_heap.pop();
+    }
+    sort(output.begin(), output.end(), compare);
+    for (Car c : output)
+    {
+        cout << c.id << endl;
     }
 }
 
