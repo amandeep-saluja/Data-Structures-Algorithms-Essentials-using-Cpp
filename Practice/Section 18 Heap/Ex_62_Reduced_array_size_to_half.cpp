@@ -1,40 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class compare
-{
-public:
-    bool operator()(pair<int, int> a, pair<int, int> b)
-    {
-        return a.first < b.first;
-    }
-};
-
 int minSetSize(vector<int> &arr)
 {
-    sort(arr.begin(), arr.end());
-    priority_queue<pair<int, int>, vector<pair<int, int>>, compare> maxHeap;
-    int cnt = 1;
-    int ans = 0;
-    for (int i = 1; i <= arr.size(); i++)
+    int n = arr.size();
+    unordered_map<int, int> map;
+    priority_queue<int> q;
+
+    for (int x : arr)
     {
-        if (arr[i] == arr[i - 1])
-        {
-            cnt++;
-        }
-        else
-        {
-            maxHeap.push({cnt, arr[i - 1]});
-            cnt = 1;
-        }
+        map[x]++;
     }
 
-    int sum = 0;
-    while (arr.size() - sum > arr.size() / 2)
+    for (auto p : map)
     {
-        pair<int, int> top = maxHeap.top();
-        sum += top.first;
-        maxHeap.pop();
+        q.push(p.second);
+    }
+
+    int sum = 0, ans = 0;
+    while (n - sum > n / 2)
+    {
+        sum += q.top();
+        q.pop();
         ans++;
     }
     return ans;
