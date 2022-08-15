@@ -38,6 +38,10 @@ class HashTable
         return idx;
     }
 
+    void rehash()
+    {
+    }
+
 public:
     HashTable(int default_size = 10)
     {
@@ -60,28 +64,34 @@ public:
         n->next = this->table[idx];
         this->table[idx] = n;
         cs++;
-        
-        /*
-        Insertion at tail
-        get the idx through hash function
-        check whether we have a Node created at the idx
-        if so place the value at the end of node
-        else create a new node and pass the address of node to hashtable's idx
 
-        int idx = this->hashFunction(key);
-        if (this->table[idx] != NULL)
+        float load_factor = cs / float(ts);
+        if (load_factor > 0.7)
         {
-            Node<T> *temp = this->table[idx];
-            while (temp->next != NULL)
-            {
-                temp = temp->next;
-            }
-            temp->next = new Node<T>(key, value);
+            this->rehash();
         }
-        else
-        {
-            this->table[idx] = new Node<T>(key, value);
-        }
-        */
     }
 };
+
+/*
+Insertion at tail
+get the idx through hash function
+check whether we have a Node created at the idx
+if so place the value at the end of node
+else create a new node and pass the address of node to hashtable's idx
+
+int idx = this->hashFunction(key);
+if (this->table[idx] != NULL)
+{
+    Node<T> *temp = this->table[idx];
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    temp->next = new Node<T>(key, value);
+}
+else
+{
+    this->table[idx] = new Node<T>(key, value);
+}
+*/
