@@ -16,5 +16,15 @@ int main()
 
     h.print();
 
+    int *price = h.search("Mango");
+    if (price != NULL)
+    {
+        cout << "Price of fruit is " << *price << endl;
+    }
+    else
+    {
+        cout << "Fruit is not present" << endl;
+    }
+
     return 0;
 }

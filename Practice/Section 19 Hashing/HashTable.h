@@ -131,6 +131,23 @@ public:
             cout << endl;
         }
     }
+
+    T *search(string key)
+    {
+        int idx = this->hashFunction(key);
+
+        Node<T> *temp = this->table[idx];
+
+        while (temp != NULL)
+        {
+            if (temp->key == key)
+            {
+                return &(temp->value);
+            }
+            temp = temp->next;
+        }
+        return NULL;
+    }
 };
 
 /*
