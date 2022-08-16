@@ -52,6 +52,7 @@ class HashTable
         // save the pointer to old table and we will do insertions in new table
         Node<T> **oldTable = this->table;
         int oldTs = this->ts;
+        this->cs = 0;
 
         // increase the table size
         this->ts = 2 * this->ts + 1;
@@ -86,7 +87,7 @@ class HashTable
     }
 
 public:
-    HashTable(int default_size = 10)
+    HashTable(int default_size = 7)
     {
         this->cs = 0;
         this->ts = default_size;
@@ -112,6 +113,22 @@ public:
         if (load_factor > 0.7)
         {
             this->rehash();
+        }
+    }
+
+    void print()
+    {
+        // Iterate over buckets
+        for (int i = 0; i < this->ts; i++)
+        {
+            Node<T> *temp = this->table[i];
+            cout << "Bucket " << i << "->";
+            while (temp != NULL)
+            {
+                cout << temp->key << " -> ";
+                temp = temp->next;
+            }
+            cout << endl;
         }
     }
 };
