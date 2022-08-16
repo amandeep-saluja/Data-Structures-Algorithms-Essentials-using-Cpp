@@ -16,6 +16,10 @@ int main()
 
     h.print();
 
+    h.erase("Orange");
+
+    h.print();
+
     int *price = h.search("Mango");
     if (price != NULL)
     {

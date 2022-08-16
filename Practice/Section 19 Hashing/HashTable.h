@@ -132,6 +132,23 @@ public:
         }
     }
 
+    bool isPresent(string key)
+    {
+        int idx = this->hashFunction(key);
+
+        Node<T> *temp = this->table[idx];
+
+        while (temp != NULL)
+        {
+            if (temp->key == key)
+            {
+                return true;
+            }
+            temp = temp->next;
+        }
+        return false;
+    }
+
     T *search(string key)
     {
         int idx = this->hashFunction(key);
@@ -147,6 +164,40 @@ public:
             temp = temp->next;
         }
         return NULL;
+    }
+
+    void erase(string key)
+    {
+        // find the bucket id
+        // iterate over the linked list
+        // you have to do
+
+        int idx = this->hashFunction(key);
+
+        Node<T> *temp = this->table[idx];
+        Node<T> *prev = NULL;
+
+        while (temp != NULL)
+        {
+            if (temp->key == key)
+            {
+                if (prev == NULL)
+                {
+                    this->table[idx] = temp->next;
+                }
+                else
+                {
+                    prev->next = temp->next;
+                }
+                // remove the reference to next node
+                // otherwise that will also be deleted while deleting the current node
+                temp->next = NULL;
+                delete temp;
+                break;
+            }
+            prev = temp;
+            temp = temp->next;
+        }
     }
 };
 
