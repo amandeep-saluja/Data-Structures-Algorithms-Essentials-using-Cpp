@@ -87,6 +87,23 @@ class HashTable
     }
 
 public:
+    T &operator[](string key)
+    {
+        // return the value
+        // if key is not found then create a new node and return
+        // return the existing node
+
+        T *valueFound = this->search(key);
+        if (valueFound == NULL)
+        {
+            T object;
+            this->insert(key, object);
+            valueFound = this->search(key);
+        }
+
+        return *valueFound;
+    }
+
     HashTable(int default_size = 7)
     {
         this->cs = 0;
@@ -168,10 +185,6 @@ public:
 
     void erase(string key)
     {
-        // find the bucket id
-        // iterate over the linked list
-        // you have to do
-
         int idx = this->hashFunction(key);
 
         Node<T> *temp = this->table[idx];

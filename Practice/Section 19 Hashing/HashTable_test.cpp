@@ -30,5 +30,12 @@ int main()
         cout << "Fruit is not present" << endl;
     }
 
+    h["newFruit"] = 200;
+    cout << "New Fruit cost : " << h["newFruit"] << endl;
+    h["newFruit"] += 20;
+    cout << "New Fruit | cost :" << h["newFruit"] << endl;
+
+    h.print();
+
     return 0;
 }
