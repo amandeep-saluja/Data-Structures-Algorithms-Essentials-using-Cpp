@@ -15,6 +15,15 @@ public:
         this->value = value;
         this->next = NULL;
     }
+
+    // deletes the next node before deleting the present node
+    ~Node()
+    {
+        if (this->next != NULL)
+        {
+            delete this->next;
+        }
+    }
 };
 
 template <typename T>
@@ -40,6 +49,40 @@ class HashTable
 
     void rehash()
     {
+        // save the pointer to old table and we will do insertions in new table
+        Node<T> **oldTable = this->table;
+        int oldTs = this->ts;
+
+        // increase the table size
+        this->ts = 2 * this->ts + 1;
+        this->table = new Node<T> *[this->ts]; // you should make it prime
+
+        for (int i = 0; i < this->ts; i++)
+        {
+            this->table[i] = NULL;
+        }
+
+        // copy elements from oldTable to new table
+        for (int i = 0; i < oldTs; i++)
+        {
+            Node<T> *temp = oldTable[i];
+
+            while (temp != NULL)
+            {
+                string key = temp->key;
+                T value = temp->value;
+                this->insert(key, value);
+                temp = temp->next;
+            }
+
+            // deletes the ith Linked List
+            if (oldTable[i] != NULL)
+            {
+                delete oldTable[i];
+            }
+        }
+
+        delete[] oldTable;
     }
 
 public:
