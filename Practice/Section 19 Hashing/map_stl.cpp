@@ -8,24 +8,24 @@ int main()
 
     map<string, int> menu;
 
-    // Insert key value pairs inside the hashtable O(1) operation
+    // Insert key value pairs inside the hashtable O[logN] operation
     menu["Maggie"] = 15;
     menu["colddrink"] = 20;
     menu["dosa"] = 99;
     menu["indianplatter"] = 399;
     menu["pizza"] = 499;
 
-    // updation O(1)
+    // updation O[logN]
     menu["dosa"] = (1 + 0.1) * menu["dosa"];
 
-    // Search
+    // Deletion O[logN]
+    menu.erase("dosa");
+
+    // Search O[logN]
     string item;
     cin >> item;
 
     cout << menu["dosa"] << endl;
-
-    // Deletion O(1)
-    menu.erase("dosa");
 
     if (menu.count(item) == 0)
     {
