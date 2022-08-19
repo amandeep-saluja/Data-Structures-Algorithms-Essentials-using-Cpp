@@ -63,5 +63,28 @@ public:
         return temp->isTerminal;
     }
 
+    vector<string> findPrefixStrings(vector<string> words, string prefix)
+    {
+        vector<string> output;
+        for (string s : words)
+        {
+            this->insert(s);
+        }
+        Node *temp = root;
+
+        for (char ch : prefix)
+        {
+            if (temp->m.count(ch) == 0)
+            {
+                return output;
+            }
+            temp = temp->m[ch];
+        }
+
+        for(pair<char, Node*> w: temp->m) {
+            
+        }
+    }
+
     // Deletion O[length of character]
 };
