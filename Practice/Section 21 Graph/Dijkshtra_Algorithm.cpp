@@ -16,7 +16,7 @@ public:
         l = new list<pair<int, int>>[V];
     }
 
-    void addEdge(int i, int j, int wt, bool undir = false)
+    void addEdge(int i, int j, int wt, bool undir = true)
     {
         l[i].push_back({wt, j});
         if (undir)
@@ -73,7 +73,7 @@ public:
                     }
                     // insert the updated value with the new dist
                     dist[nbr] = distTillNow + currentEdge;
-                    s.insert(make_pair(dist[nbr], nbr));
+                    s.insert({dist[nbr], nbr});
                 }
             }
         }
