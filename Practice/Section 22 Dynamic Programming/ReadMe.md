@@ -10,11 +10,11 @@
 * **Memoization Tree**
     - We will store the subproblems in any Data structure and return the result when we need it. 
     - Two approaches: 
-    --  Top Down DP
-    -- Bottom Up DP
+      --  Top Down DP
+      -- Bottom Up DP
 
-## Top Down DP (AKA Recursion + Memoization)
+## Top Down DP (Recursion + Memoization)
 In top down DP, we start building the big solution right way by explaining how you build it from smaller solutions.
 
-## Bottom Up DP (AKA Iterative + Memoization)
+## Bottom Up DP (Iterative + Memoization)
 In Bottom Up DP, we start with small solutions and then use the small solutions to build larger solutions.
