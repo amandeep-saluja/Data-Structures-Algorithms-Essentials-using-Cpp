@@ -1,6 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Top down approach
+
+int minNoOfCoins(vector<int> coins, int amount)
+{
+}
+
+// Bottom up approach
 int minCoinChange(vector<int> coins, int amount)
 {
     vector<int> dp(amount + 1, 0);
