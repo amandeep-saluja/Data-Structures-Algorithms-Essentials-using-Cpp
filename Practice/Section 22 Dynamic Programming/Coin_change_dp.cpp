@@ -1,14 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Top down approach
+// Top down approach (Recursion)
 
-int minNoOfCoins(vector<int> coins, int amount)
+int helper(vector<int> &coins, vector<int> &dp, int amt)
 {
+    // base case
+    if (amt == 0)
+    {
+        dp[0] = 0;
+        return dp[0];
+    }
+
+    // recursive case
+    if (dp[amt] != INT_MAX)
+    {
+        return dp[amt];
+    }
+    
+    for (int c : coins)
+    {
+        if (amt - c >= 0 and dp[amt - c] != INT_MAX)
+        {
+            dp[amt] = min(dp[amt], dp[amt - c] + 1);
+        }
+    }
+    return helper(coins, dp, amt);
 }
 
-// Bottom up approach
-int minCoinChange(vector<int> coins, int amount)
+int minNoOfCoins(vector<int> &coins, int amount)
+{
+    vector<int> dp(amount + 1, INT_MAX);
+    return helper(coins, dp, amount);
+}
+
+// Bottom up approach (Iteration)
+int minCoinChange(vector<int> &coins, int amount)
 {
     vector<int> dp(amount + 1, 0);
     int t = coins.size();
