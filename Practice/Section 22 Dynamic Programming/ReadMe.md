@@ -4,7 +4,7 @@
 * **Recursion Tree**
     - We will stuck in Overlapping subproblem.
 * **Overlapping subproblem**
-    - We are calculating the overlapping subproblems again and again, which will take O[2^{55}] time.
+    - We are calculating the overlapping subproblems again and again, which will take O[2^N] time.
 
 ## Solution 
 * **Memoization Tree**
